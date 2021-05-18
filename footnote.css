@@ -1,0 +1,12 @@
+.cdx-footnote {
+    display: inline-block;
+    font-family: courier;
+    background-color: #dedede;
+    padding: 5px, 5px;
+}
+.cdx-footnote::before {
+    content:"[^";
+}
+.cdx-footnote::after {
+    content:"]";
+}
