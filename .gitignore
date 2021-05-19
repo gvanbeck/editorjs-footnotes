@@ -1,3 +1,5 @@
+#MacOS
+.DS_*
 # Logs
 logs
 *.log

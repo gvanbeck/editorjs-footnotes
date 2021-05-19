@@ -1,23 +1,6 @@
-function cleanChars(chars, regex) {
-    return chars.match(regex).join('')
-}
+import { getRandomID } from './Utilities.js';
 
-function getRandomID(n) {
-    function getSomeChars() {
-        const min = 1000 * 1000 * 1000
-        const max = 10 * min - 1
-        return (Math.random() * (max - min) + min).toString(36)
-    }
-
-    let ret = ''
-    while (ret.length < n) {
-        ret = ret.concat(cleanChars(getSomeChars().toLowerCase(), /[a-z0-9]/g))
-    }
-
-    return '#fn-' + ret.slice(0, n)
-}
-
-class FootnoteTool {
+export class FootnoteTool {
 
     static get isInline() {
         return true;
@@ -123,77 +106,3 @@ class FootnoteTool {
         }
     }
 }
-
-
-class FootnoteBlock {
-    static get toolbox() {
-        return {
-            title: 'Image',
-            icon: '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>'
-        };
-    }
-
-    constructor({ api, config, data }) {
-        this.api = api;
-        this.config = config;
-        this.data = data;
-    }
-
-    render() {
-        const template = '<div>{{noteId}}</div><div class="fnb-content">Hello There</div>';
-        const container = document.createElement('div');
-        container.innerHTML = Mustache.render(template, {noteId:'#12345'});
-        let elms = container.querySelectorAll('.fnb-content');
-        [].forEach.call(elms, (e) => {
-            e.contentEditable = true;
-        });
-
-        return container;
-    }
-
-    save(elm) {
-        return {
-            ref: 'test'
-        }
-    }
-}
-
-class FootnoteManager {
-
-    constructor() {
-        this.editor;
-        this.keys = {};
-    }
-
-    registerEditor(editor) {
-        this.editor = editor;
-    }
-
-    editorChange() {
-        const b = this.editor.blocks;
-        const n = b.getBlocksCount();
-        for (let i = 0; i < n; i++) {
-            let block = b.getBlockByIndex(i);
-            let elms = block.holder.querySelectorAll('.'+FootnoteTool.CSS);
-
-            [].forEach.call(elms, (e) => {
-                let id = e.innerText;
-                if (!this.keys[id]) {
-                    this.keys[id] = (new Date).getTime();
-                }
-            });
-        }
-    }
-
-    focusOnBlock(id) {
-        this.noteEditor.blocks.insert(
-            'paragraph',
-            {text: "Hello World: " + id},
-            undefined,
-            undefined,
-            undefined,
-            true
-        );
-    }
-}
-
