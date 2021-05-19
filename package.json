@@ -1,0 +1,34 @@
+{
+  "name": "@gvanbeck/editorjs-footnote",
+  "version": "0.1.0",
+  "description": "extension for managing footnotes in editor-js",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gvanbeck/editorjs-footnotes.git"
+  },
+  "keywords": [
+    "editorjs",
+    "footnote",
+    "pandoc",
+    "latex"
+  ],
+  "author": "gert.vanbeckevoort@gmail.com",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/gvanbeck/editorjs-footnotes/issues"
+  },
+  "homepage": "https://github.com/gvanbeck/editorjs-footnotes#readme",
+  "devDependencies": {
+    "css-loader": "^5.2.4",
+    "less": "^4.1.1",
+    "less-loader": "^9.0.0",
+    "lodash": "^4.17.21",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0"
+  }
+}
