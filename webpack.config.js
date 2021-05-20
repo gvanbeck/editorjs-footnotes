@@ -30,6 +30,14 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.svg$/i,
+                loader: 'svg-inline-loader',
+            },
+            {
+                test: /\.mustache$/i,
+                loader: 'mustache-loader',
+            }
         ],
     },
 }

@@ -37,4 +37,8 @@ export class FootnoteManager {
             true
         );
     }
+
+    getKeys() {
+        return this.keys;
+    }
 }

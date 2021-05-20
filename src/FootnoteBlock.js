@@ -1,10 +1,14 @@
-import Mustache from 'mustache';
+import icon from './assets/sticky-notes.svg';
+import template from './templates/footnote-block.mustache';
+import jsu from 'handle-events';
+import { FootnoteTool } from './FootnoteTool.js';
+import { forEach } from 'lodash';
 
 export class FootnoteBlock {
     static get toolbox() {
         return {
-            title: 'Image',
-            icon: '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>'
+            title: 'Footnote',
+            icon: icon
         };
     }
 
@@ -15,13 +19,29 @@ export class FootnoteBlock {
     }
 
     render() {
-        const template = '<div>{{noteId}}</div><div class="fnb-content">Hello There</div>';
         const container = document.createElement('div');
-        container.innerHTML = Mustache.render(template, {noteId:'#12345'});
+        container.classList.add('cdx-footnote-block');
+        container.innerHTML = template({noteId:'#12345'});
         let elms = container.querySelectorAll('.fnb-content');
         [].forEach.call(elms, (e) => {
             e.contentEditable = true;
         });
+
+
+        jsu.addEventListener(container, 'click.footnote', (e) => {
+            const b = this.api.blocks;
+            const n = b.getBlocksCount();
+
+            for (let i = 0; i < n; i++) {
+                let block = b.getBlockByIndex(i);
+                let elms = block.holder.querySelectorAll('.'+FootnoteTool.CSS);
+
+                forEach(elms, (e) => {
+                    let id = e.innerText;
+                    console.log(id);
+                });
+            }
+        }, true);
 
         return container;
     }
