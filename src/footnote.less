@@ -1,8 +1,12 @@
+@import 'colors.less';
+
 .cdx-footnote {
     display: inline-block;
     font-family: courier;
-    background-color: #dedede;
+    font-size: small;
     padding: 5px, 5px;
+    color: @color_robijn;
+    margin: 0 5px 0 5px;
 
     &:before {
         content:"[^";
@@ -25,5 +29,9 @@
         border: 1px solid #999999;
 
     }
+}
+
+.cdx-footnote-icon {
+    height: 24px;
 }
 

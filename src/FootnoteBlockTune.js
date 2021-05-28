@@ -19,4 +19,9 @@ export class FootnoteBlockTune {
 
         return button; 
     }
+
+    wrap(blockContent) {
+        console.log(blockContent);
+        return blockContent;
+    }
 }
